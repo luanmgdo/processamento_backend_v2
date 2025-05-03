@@ -1,0 +1,957 @@
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Consulta Processual</title>
+
+<script language="JavaScript1.2" src="./js/jscriptData.js"></script>
+<script language="JavaScript1.2" src="./js/jscriptGeral.js"></script>
+<link rel="stylesheet" href="./css/estilo.css" type="text/css">
+<link rel="shortcut icon" type="image/x-icon" href="/consultaProcessual/favicon.ico">
+</head>
+<script language="JavaScript1.2" src="./js/jscriptAplicacao.js"></script>
+<script language="javascript">
+	function mostraDiv(elemento, infoDiv, deslocamento){		
+		var rect = elemento.getBoundingClientRect();
+
+		document.getElementById(infoDiv).style.top = (rect.top - deslocamento) + "px";
+		document.getElementById(infoDiv).style.left = rect.left + "px";			
+		document.getElementById(infoDiv).style.display = 'inline';
+
+
+	}
+	
+	function escondeDiv(infoDiv){
+		document.getElementById(infoDiv).style.display = 'none';
+	}
+</script>
+
+<style>
+.botao_app, .botao_app:visited, .botao_app:link{
+    background: #044f86;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    text-align: center;
+    position: relative;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.botao_app:hover{
+    text-decoration: underline;
+}
+
+@media only screen and (min-width: 1500px) {
+    .tabelaFlutuante{
+        margin-top: -80px;
+    }
+}
+</style>
+
+<body  style="background: #CCCCCC;" onload="document.empregadorForm.stCheckBox.checked=true; document.advogadoForm.stCheckBox.checked=true;" />
+
+	<div id="infoAcordao" style="display:none;position:fixed;">
+		<table class="tabelaInfo">
+			<tr>
+				<td>
+					A disponibilização do acórdão ocorre no dia da liberação do
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Diário Eletrônico da Justiça do Trabalho - DEJT.
+				</td>
+			</tr>
+			<tr>
+				<td> 			
+					Segundo o § 3º do art. 4º da Lei 11.419/2016, considera-se 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					como data da publicação o primeiro dia útil seguinte ao da
+				</td>
+			</tr>
+			<tr>
+				<td> 
+					disponibilização da informação no Diário da Justiça eletrônico.
+				</td>
+			</tr>			
+		</table>	
+	</div>	
+	<div id="infoDespacho" style="display:none;position:fixed;">
+		<table class="tabelaInfo">
+			<tr>
+				<td>
+					Despachos e Decisões publicados estão disponíveis 
+				</td>
+			</tr>
+			<tr>
+				<td> 			
+					no Diário Eletrônico da Justiçaa do Trabalho - DEJT
+				</td>
+			</tr>						
+		</table>	
+	</div>
+	
+	<div id="infoPeticao" style="display:none;position:fixed;">
+		<table class="tabelaInfo">
+			<tr>
+				<td>
+					Clique no número da petição para visualizar  
+				</td>
+			</tr>
+			<tr>
+				<td>
+					as datas de protocolo, registro, cadastro, 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					autuação, arquivamento e outros andamentos relacionados.
+				</td>
+			</tr>						
+		</table>	
+	</div>
+	
+
+	<table style="width: 100%"  cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="topoSistema" style="height: 120px;">
+				<a href="http://www.tst.jus.br">
+					<img src="./img/layout_set_logo.png">
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="subtitulo" colspan=2 style="width: 100%">
+				<table style="width: 100%">
+					<tr>
+						<td align="left">&nbsp;&nbsp;<a class="subtitulo" href="consultaTstNumUnica.do" title="Retornar para a tela de pesquisa">Pesquisa Processual</a> / Detalhes do processo</td>
+						<td align="right">
+							<a class="subtitulo" href="http://www.tst.jus.br">TST / Inicio</a>
+						</td>
+					</tr>				
+				</table>					
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" align="center">
+				<table align="center" style="width: 75%; height:100%;background: white;" border=0 cellpadding="0" cellspacing="0">		
+					<tr>
+						<td style="width: 100%" align="right">
+							<table cellpadding="5">
+	<tr>
+		<td>
+			<img src="./img/voltar.png" style="height: 25px; cursor: pointer" title="Retornar para tela anterior" onclick="history.back();">
+			<a href="consultaTstNumUnica.do">
+				<img src="./img/telaPesquisa.png" style="height: 25px;  cursor: pointer" title="Retornar para pesquisa processual">
+			</a>
+			<a href="http://www.tst.jus.br">
+				<img src="./img/home.png" style="height: 25px;  cursor: pointer" title="Ir para o site do TST">
+			</a>
+			
+		</td>
+	</tr>
+</table>
+						</td>
+					</tr>			
+					<tr>
+						<td>
+							<table align="center" width="99%" cellpadding="0" cellspacing="0" border="0">
+								<!-- <tr>
+									<td class="titulo2" colspan="2" align="right">Pesquisa Processual</td>
+								</tr> -->
+								<tr>
+									<td align="center" colspan="2" class="label">
+										<br>Este serviçoo tem caráter meramente informativo, portanto, sem cunho oficial.
+									</td>
+								</tr>
+								<tr><td>&nbsp;</td></tr>
+								
+								<tr>
+									<td colspan="2">
+										<table align="right" border="0" width="100%" cellspacing="0" cellpadding="0">
+											<tr>
+												<td class="dadosProcesso">
+													
+														<b>Processo:  <font color="#035fa3">AIRR - 155-87.2014.5.02.0080</font></b>
+													 
+													 
+													
+														<!-- <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+														&nbsp; (Lei 13.467/2017 - Conector PJe-JT - eSIJ - Execução - Tramitação Eletrônica)
+													 
+													
+												</td>
+												
+													<td  class="dadosProcesso" align="center" style="border: 1px solid black;">
+														<b><U>Informações adicionais:</U>  <font color="#035fa3"><br>recurso de revista adesivo, pág.383/402,sem exame prévio de admissibilidade, motivo pelo qual a CCADP não o considerou na autuação do TST.</font></b>
+													</td>
+												
+											</tr>
+										</table>
+									</td>
+								</tr>
+								
+									<tr>
+										<td colspan="2"  class="dadosProcesso"><b>Referencias ao Processo: </b>
+											<a href="resumoForm.do?consulta=1&numeroInt=190933&anoInt=2018&qtdAcesso=59921957">&nbsp;Prevenção 
+												&nbsp;-&nbsp;
+												AIRR - 155-87.2014.5.02.0080
+											</a>
+											<br>
+										</td>
+									</tr>
+								
+								
+									<tr>
+										<td colspan="2"  class="dadosProcesso">
+											<b>Número no TRT de Origem: 
+											<font color="#035fa3">AIRR-155/2014-0080-02.</font></b><br>
+										</td>
+									</tr>
+								
+								
+								
+								
+								
+								
+									<tr>
+										<td colspan="2" class="dadosProcesso"><b>Órgão Judicante: <font color="#035fa3">3ª Turma</font>
+										</td>
+									</tr>
+								
+								
+									
+										<tr>
+											<td colspan="2" class="dadosProcesso">
+												<b>Relator: <font color="#035fa3">Ministro Alexandre de Souza Agra Belmonte</font>
+											</td>
+										</tr>
+									
+									
+								
+							
+								
+								
+								
+								<tr><td colspan="2">&nbsp;</td></tr>
+								<tr>
+									<td colspan="2" align="right">
+										<table class="tabelaFlutuante">
+											<tr style="vertical-align: top;">
+												<td>
+													<b>Peticione neste processo:</b><br/>
+													<a class="botao_app" href="http://www.tst.jus.br/peticionamento-eletronico" target="blank">Peticionamento Eletrônico (e-DOC) V2 </a>
+												</td>
+												<td>
+													<b>Visualize as peças na íntegra:</b><br/>
+													<a class="botao_app" href="https://aplicacao3.tst.jus.br/visualizacaoAutos" style="padding-right: 40px; padding-left: 40px" target="blank">Visualização de Autos<br> (Processo Eletrônico)</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="titulo">Partes do processo</td>
+								</tr>
+								<tr><td colspan="2">&nbsp;</td></tr>
+								
+								
+									
+										<tr>
+											<td class="dadosProcesso" style="width: 100px;"><b>Agravante(s): </b></td>
+											<td class="dadosProcesso">COMPANHIA BRASILEIRA DE DISTRIBUIÇÃO</td>
+										</tr>
+									
+									
+										<tr>
+											<td class="dadosProcesso"><b>Advogada: </b></td>
+											<td class="dadosProcesso">Dra. Raquel Nassif Machado Paneque</td>
+										</tr>
+									
+									
+									<tr><td>&nbsp;</td></tr>
+								
+									
+										<tr>
+											<td class="dadosProcesso" style="width: 100px;"><b>Agravado(s): </b></td>
+											<td class="dadosProcesso">UENDERSON COELHO MACHADO</td>
+										</tr>
+									
+									
+										<tr>
+											<td class="dadosProcesso"><b>Advogado: </b></td>
+											<td class="dadosProcesso">Dr. Marcelo Alberto Rua Afonso</td>
+										</tr>
+									
+									
+									<tr><td>&nbsp;</td></tr>
+								
+										
+											
+								
+								<tr>
+									<td colspan="2">
+										<br> 
+											<table border="0" width="100%" cellspacing=0 cellpadding=2>
+												<tr>
+													<th colspan="2" align="left" class="subtitulo">Histórico do processo</th>
+												</tr>
+							
+												
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">18/10/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Tribunal Regional do Trabalho da 2ª Região o TRT</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">18/10/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Transitado em Julgado em 13/10/2021</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">06/10/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																		
+																			<tr>
+																				<td>
+																					<font color="black">
+																						<a href="peticaoForm.do?numInt=190933&anoInt=2018&numPet=403313&anoPet=2021">Petição: 403313/2021 - Resposta ao despacho</a>															
+																						<a href='#' onmouseover="mostraDiv(this, 'infoPeticao', 60);" onmouseout="escondeDiv('infoPeticao');">
+																							<img style="vertical-align:middle" src="img/msg_info.png" height='15px' />
+																						</a>
+																					</font>
+																				</td>
+																			</tr>
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">21/09/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Publicado despacho em 21/09/2021</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">20/09/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black"><a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/despacho.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=20/09/2021 19:00:00&nia=0'>Negado provimento ao Agravo&nbsp&nbsp</a><a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/despacho.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=20/09/2021 19:00:00&nia=0'><img style="vertical-align:middle" src="img/pdf_ico.png" title="Documento PDF" width=15 height=15 border="0" /></a>&nbsp&nbsp<a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/despacho.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=20/09/2021 19:00:00&nia=0&origem=documento'><img style="vertical-align:middle" src="img/word_ico.png" title="Documento RTF" width=15 height=15 border="0" /></a>&nbsp;&nbsp;<a href='#' onmouseover="mostraDiv(this, 'infoDespacho', 90);" onmouseout="escondeDiv('infoDespacho');"><img style="vertical-align:middle" src="img/msg_info.png" height='15px' /></a></font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">16/09/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Secretaria da 3ª Turma para publicar decisão monocrática</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">30/08/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Conclusos para voto/decisão (Gabinete do Ministro Alexandre de Souza Agra Belmonte)</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">30/08/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Distribuído por sorteio  ao Exmº Ministro AAB - T3 em 30/08/2021</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">30/08/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Autuado</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">18/08/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Coordenadoria de Classificação, Autuação e Distribuição de Processos ( retorno do TRT com novo recurso )</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">14/07/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Coordenadoria de Processos Eletrônicos ( retorno do TRT com novo recurso )</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">14/07/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Recebidos os autos para apreciação</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">14/07/2021</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Recebidos os autos</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">17/06/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Recebidos os autos (retorno do TST)</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">13/06/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Tribunal Regional do Trabalho da 2ª Região o TRT</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">11/06/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Transitado em Julgado em 07/06/2019</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">11/06/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Secretaria da 3ª Turma para correção de local de destino ou motivo de andamento</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">07/06/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Coordenadoria de Recursos para processar o Recurso Extraordinário</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">27/05/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																		
+																			<tr>
+																				<td>
+																					<font color="black">
+																						<a href="peticaoForm.do?numInt=190933&anoInt=2018&numPet=127758&anoPet=2019">Petição: 127758/2019 - Requer providências</a>															
+																						<a href='#' onmouseover="mostraDiv(this, 'infoPeticao', 60);" onmouseout="escondeDiv('infoPeticao');">
+																							<img style="vertical-align:middle" src="img/msg_info.png" height='15px' />
+																						</a>
+																					</font>
+																				</td>
+																			</tr>
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">27/05/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																		
+																			<tr>
+																				<td>
+																					<font color="black">
+																						<a href="peticaoForm.do?numInt=190933&anoInt=2018&numPet=127755&anoPet=2019">Petição: 127755/2019 - Requer providências</a>															
+																						<a href='#' onmouseover="mostraDiv(this, 'infoPeticao', 60);" onmouseout="escondeDiv('infoPeticao');">
+																							<img style="vertical-align:middle" src="img/msg_info.png" height='15px' />
+																						</a>
+																					</font>
+																				</td>
+																			</tr>
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">17/05/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black"><a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/acordao.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=17/05/2019 07:00:00&nia=7343045'>Publicado acórdão em 17/05/2019&nbsp&nbsp</a><a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/acordao.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=17/05/2019 07:00:00&nia=7343045'><img style="vertical-align:middle" src="img/pdf_ico.png" title="Documento PDF" width=15 height=15 border="0" /></a>&nbsp&nbsp<a target="_blank" href='http://aplicacao5.tst.jus.br/consultaDocumento/acordao.do?anoProcInt=2018&numProcInt=190933&dtaPublicacaoStr=17/05/2019 07:00:00&nia=7343045&origem=documento'><img style="vertical-align:middle" src="img/word_ico.png" title="Documento RTF" width=15 height=15 border="0" /></a>&nbsp;&nbsp;<a href='#' onmouseover="mostraDiv(this, 'infoAcordao', 90);" onmouseout="escondeDiv('infoAcordao');"><img style="vertical-align:middle" src="img/msg_info.png" height='15px' /></a></font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">16/05/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Disponibilizado(a) acórdão no Diário da Justiça Eletrônico</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">15/05/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black"><a href='decisaoForm.do?numInt=190933&anoInt=2018&codOrgaoJudic=79&anoPauta=2019&numPauta=11&tipSessao=O'>Negado provimento ao Agravo</a></font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">25/04/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Incluído em pauta o processo para o  (de 07/05/2019 a 14/05/2019 00:00 vinculado à 11ª Sessão Presencial de 15/05/2019 14:30).</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">24/04/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Disponibilizado(a) PAUTA DE JULGAMENTO no Diário da Justiça Eletrônico</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">15/04/2019</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Secretaria da 3ª Turma para incluir em pauta</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">20/09/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Conclusos para voto/decisão (Gabinete do Ministro Alexandre de Souza Agra Belmonte)</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">20/09/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Distribuído por sorteio  ao Exmº Ministro AAB - T3 em 20/09/2018</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">19/09/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Autuado</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">17/09/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Coordenadoria de Classificação, Autuação e Distribuição de Processos para autuar e distribuir</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">06/08/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Remetidos os Autos para Coordenadoria de Processos Eletrônicos para identificação de peças</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">03/08/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Recebidos os autos no TST</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+														
+															<tr class="historicoProcesso">
+																<td align="center" class="historicoProcesso"><font color="black">03/08/2018</font>
+																</td>
+																<td class="historicoProcesso">
+																	<table width="100%">
+																		
+																			<tr>
+																				<td><font color="black">Pré-Autuação</font>
+																				</td>
+																			</tr>
+																		
+																		
+																	</table>
+																</td>
+															</tr>
+														
+													
+																								
+												
+												
+												
+													
+												
+											</table>
+										
+									</td>
+								</tr>
+							</table>
+							
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+
+
+
+<br>
+
+	
+	
+</body>
+</html>

@@ -1,0 +1,24 @@
+# 🧪 Teste Técnico – Processamento Backend - feito em C#
+
+**Início:** 30/04/2025 – 20:00  
+**Fim:** 03/04/2025 - 18:48
+
+---
+
+##  Descrição
+
+Script desenvolvido para processar arquivos `.pdf` e `.html`, extrair seu conteúdo e gerar saídas em `.txt`, com relatório de performance ao final.
+
+---
+
+## Passos para execução
+
+1. **Executar código**
+```bash
+dotnet run
+```
+
+
+---
+
+ Ao final, será gerado o arquivo `Relatorio final.txt` com as estatísticas de processamento.
