@@ -1,4 +1,4 @@
-# 🧪 Teste Técnico – Processamento Backend - feito em C#
+# Teste Técnico – Processamento Backend - feito em C#
 
 **Início:** 30/04/2025 – 20:00  
 **Fim:** 03/04/2025 - 18:48
